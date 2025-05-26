@@ -52,9 +52,9 @@ gh auth refresh --reset-scopes # minimum
 
 API exists and is accessible through the CLI with `gh api`.
 
-http://cli.github.com/manual/gh_api
-https://docs.github.com/en/rest
-https://docs.github.com/en/rest/quickstart
+- http://cli.github.com/manual/gh_api
+- https://docs.github.com/en/rest
+- https://docs.github.com/en/rest/quickstart
 
 ```sh
 # Endpoints: Actions | Activity | Apps | Billing | Branches |
