@@ -1,12 +1,12 @@
 # `gh` Scripting
 
-Exploring working with the Github CLI... a lot.
+Experiments in working with Github through the CLI.
 
 ## Installation
 
 ```sh
-# note: Github actions use dash shell, which is a lightweight POSIX compliant bourne shell alternative.
-# note: Use #!/usr/bin/env sh
+# note: Actions use dash, a light, POSIX compliant bourne shell alternative.
+# note: Use for portability: #!/usr/bin/env sh
 
 # install gh command
 ./install.sh
@@ -24,4 +24,16 @@ gh --help
 
 # HELP TOPICS
 # accessibility | actions | environment | exit-codes | formatting | mintty | reference
+```
+
+### Authentication
+
+https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/scopes-for-oauth-apps
+
+```sh
+# get detailed info about auth state: accounts, protocol, token scopes
+gh auth status
+gh auth refresh --scopes write:org,read:public_key # add
+gh auth refresh --remove-scopes delete_repo # remove
+gh auth refresh --reset-scopes # minimum
 ```
