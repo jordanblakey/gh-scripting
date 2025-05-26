@@ -3,9 +3,10 @@
 Experiments in working with Github through the CLI.
 
 ```sh
-# the shortlist
+# will use often
 gh repo # list | create | clone | view
 gh issue # list | create | comment | close | delete | view
+gh auth # login | status | token | refresh
 ```
 
 ## Installation
@@ -16,6 +17,9 @@ gh issue # list | create | comment | close | delete | view
 
 # install gh command
 ./install.sh
+
+# shfmt & shellcheck: `make list`, `make lint`, `make fmt`, `make fmt_preview`
+cat Makefile
 ```
 
 ## Overview
