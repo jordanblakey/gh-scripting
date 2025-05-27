@@ -47,8 +47,13 @@ https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/scopes-for-oauth-
 ```sh
 # get detailed info about auth state: accounts, protocol, token scopes
 gh auth status
+gh auth login
 gh auth refresh --scopes write:org,read:public_key # add
+gh auth refresh --scopes 'codespace'
 gh auth refresh --remove-scopes delete_repo # remove
+
+# for debug, but don't
+gh auth login --scopes admin:gpg_key,admin:org,admin:org_hook,admin:public_key,admin:repo_hook,codespace,delete_repo,delete:packages,gist,notifications,project,public_repo,read:audit_log,read:gpg_key,read:org,read:packages,read:project,read:public_key,read:repo_hook,read:user,repo_deployment,repo:invite,repo:status,security_events,user,user:email,user:follow,workflow,write:gpg_key,write:org,write:packages,write:public_key,write:repo_hook
 gh auth refresh --reset-scopes # minimum
 ```
 
@@ -85,4 +90,48 @@ curl -X POST $URL -H "Accept: application/vnd.github/json" \
 -H "X-GitHub-Api-Version: 2022-11-28" \
 -H "Authorization: Bearer $(gh auth token)" \
 --data '{"title":"hello from REST","body":"echo echo echo"}'
+```
+
+## Codespaces
+
+```sh
+# list available codespace sizes (from existing codespace)
+gh api /user/codespaces/CODESPACE-NAME/machines
+
+# create a new codespace
+ gh codespace create --display-name virtually-magic-box \
+ --repo jordanblakey/gh-scripting \
+ --location EastUs \
+ --machine standardLinux32gb \
+ --status
+
+gh codespace view --codespace $CODESPACE_NAME # note that name is not display name
+
+# different ways of listing and filtering codespace names with jq
+gh codespace list --json name --jq .[].name # get names of all codespaces
+gh cs list --json name,repository --jq "first(.[] | select(.repository | contains(\"part-of-repo-name\")) | .name)" > /tmp/buffer # get name of a codespace by
+set CODESPACE_NAME $(cat /tmp/buffer)
+set CODESPACE_NAME $(gh cs list --json 'name' --jq '.[] | select(.name | contains("space-memory")) | .name')
+gh cs list --json name,repository --jq "first(.[] | select(.repository | contains(\"part-of-repo-name\")) | .name)"
+
+# or make a comma sep name,repo list that is greppable,cuttable. this may be the most practical and portable
+alias cslist "gh cs list --json name,repository --jq '.[] | join(\",\")'"
+# note: within codespace, permissions appear to be limited to the current repository, so list yields only the current codespace
+cslist | grep part-of-name-or-repo
+
+# note: you can connect to multiple codespaces simultaneously
+gh codespace code --codespace virtually-magic-box # open codespace in vscode ssh
+# shorthand to open codespace
+gh cs code -c $CODESPACE_NAME
+
+# cleanup
+# note: you can only have 2 codespaces running at a time
+# note: codespaces seem to be permanently tied to a single repository
+gh cs stop -c $CODESPACE_NAME
+gh cs view -c $CODESPACE_NAME # confirm stopping
+gh cs delete -c $CODESPACE_NAME
+
+# see also
+gh cs logs # doesn't seem to work
+gh cs ssh
 ```
