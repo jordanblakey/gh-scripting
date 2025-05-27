@@ -7,6 +7,7 @@ Experiments in working with Github through the CLI.
 gh repo # list | create | clone | view
 gh issue # list | create | comment | close | delete | view
 gh auth # login | status | token | refresh
+gh codespace # list | create | code | stop
 ```
 
 ## Installation
