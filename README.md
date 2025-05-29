@@ -59,7 +59,7 @@ gh auth login --scopes admin:gpg_key,admin:org,admin:org_hook,admin:public_key,a
 gh auth refresh --reset-scopes # minimum
 
 # checking commit verification
-# TL;DR - use codespace associated with the repo you're committing to. Locally, use a GPG key. Use the updated bootstrap.sh in dotfiles to set up GPG...
+# TL;DR - use codespace associated with the repo you're committing to. Locally, use a GPG key. Use the updated bootstrap.sh in dotfiles to set up GPG.
 
 # docs: setup gpg signing for git commits and tags
 # https://docs.github.com/en/authentication/managing-commit-signature-verification/about-commit-signature-verification
