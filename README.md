@@ -44,6 +44,7 @@ gh --help
 ## Authentication
 
 https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/scopes-for-oauth-apps
+https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits
 
 ```sh
 # get detailed info about auth state: accounts, protocol, token scopes
@@ -56,6 +57,23 @@ gh auth refresh --remove-scopes delete_repo # remove
 # for debug, but don't
 gh auth login --scopes admin:gpg_key,admin:org,admin:org_hook,admin:public_key,admin:repo_hook,codespace,delete_repo,delete:packages,gist,notifications,project,public_repo,read:audit_log,read:gpg_key,read:org,read:packages,read:project,read:public_key,read:repo_hook,read:user,repo_deployment,repo:invite,repo:status,security_events,user,user:email,user:follow,workflow,write:gpg_key,write:org,write:packages,write:public_key,write:repo_hook
 gh auth refresh --reset-scopes # minimum
+
+# checking commit verification
+# TL;DR - use codespace associated with the repo you're committing to. Locally, use a GPG key. Use the updated bootstrap.sh in dotfiles to set up GPG.
+
+# docs: setup gpg signing for git commits and tags
+# https://docs.github.com/en/authentication/managing-commit-signature-verification/about-commit-signature-verification
+# https://docs.github.com/en/authentication/managing-commit-signature-verification/displaying-verification-statuses-for-all-of-your-commits
+# https://docs.github.com/en/authentication/managing-commit-signature-verification/checking-for-existing-gpg-keys
+# https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key
+# https://docs.github.com/en/authentication/managing-commit-signature-verification/adding-a-gpg-key-to-your-github-account
+# https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key
+# https://docs.github.com/en/authentication/managing-commit-signature-verification/associating-an-email-with-your-gpg-key
+# https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits
+
+# docs: troubleshooting
+# https://docs.github.com/en/authentication/troubleshooting-commit-signature-verification/checking-your-commit-and-tag-signature-verification-status
+
 ```
 
 ## API
