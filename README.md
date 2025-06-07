@@ -2,6 +2,9 @@
 
 Experiments in working with Github through the CLI.
 
+Related: see Github Actions experimentation around docker containers here
+https://github.com/jordanblakey/docker-in-depth
+
 ```sh
 # will use often
 gh repo # list | create | clone | view
